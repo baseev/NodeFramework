@@ -7,8 +7,12 @@
     <input type="file" name="upload" multiple="multiple">
     <input type="submit" value="Upload file" />
     </form>
-    {{#PiwikSites}}
-		<div>{{{name}}}</div>
-	{{/PiwikSites}}
+   {#pgi}
+		<div>{name}</div>
+		<div>{disese_name}</div>
+		<div>{symptoms}</div>
+		<div>{medicine_info}</div>
+		<div>{other_info}</div>
+	{/pgi}
     </body>
 </html>
