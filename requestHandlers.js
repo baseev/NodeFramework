@@ -18,6 +18,7 @@ function upload(request, response) {
 
     /* Possible error on Windows systems:
        tried to rename to an already existing file */
+       
     fs.rename(files.upload.path, "/tmp/test.png", function(err) {
       if (err) {
         fs.unlink("/tmp/test.png");
@@ -31,7 +32,7 @@ function upload(request, response) {
   });
 }
 
-function show(response) {
+function show(request, response) {
   console.log("Request handler 'show' was called.");
   fs.readFile("/tmp/test.png", "binary", function(error, file) {
     if(error) {
@@ -39,7 +40,8 @@ function show(response) {
       response.write(error + "\n");
       response.end();
     } else {
-      response.writeHead(200, {"Content-Type": "image/png"});
+      //response.write("Baseevvvvvvvv........");
+      //response.writeHead(200, {"Content-Type": "image/png"});
       response.write(file, "binary");
       response.end();
     }

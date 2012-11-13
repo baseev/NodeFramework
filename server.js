@@ -8,21 +8,19 @@ function start(route, handle) {
     console.log("Request for " + pathname + " received.");
     try
     {
-     	response.writeHead(200, constants.RESPONSE_HEADERS);
-     	
     	route(handle, pathname, request, response);
     }
     catch(e)
     {
     	console.error("Exception "+e.message);
-    	response.writeHead(404, {"Content-Type": "text/html"});
+    	response.writeHead(404, constants.HTML_RESPONSE_HEADERS);
     	response.write("404 Not found");
     	response.end();
     }
   }
 
-  http.createServer(onRequest).listen(8888);
-  console.log("Server has started.");
+  http.createServer(onRequest).listen(constants.SERVER_PORT);
+  console.log("Server has started at port : "+constants.SERVER_PORT);
 }
 
 exports.start = start;
