@@ -5,7 +5,8 @@
 	</head>
 	<body>
 		<div id="fakecontainer">
-			<div class="top"></div>
+			<div class="top">
+			</div>
 			<div class="nav"><img src="pet.jpg" alt="Cucumbertown Logo" width="160" height="20">
 				<form method="get" action="/search/" id="searchid_form" class='grid_6'>
 			            <input  type="text" value="" placeholder="What would you like to cook today?" name="q" autocomplete="off" id="q">
@@ -18,22 +19,7 @@
 				    </ul>
 				</nav>
 			</div>
-			<div class="img"></div>
-			<div class="specialnote"></div>
-			<div class="latest"></div>
-			<div class="categories">
-				<div class="cat1">
-					<div class="cat11">
-						{>"partial"/}
-					</div>
-				</div>
-				<div class="cat2">
-					<div class="cat12"></div>
-				</div>
-				<div class="cat3">
-					<div class="cat13"></div>
-				</div>
-			</div>
+			{>"partial"/}
 		</div>
 	</body>
 </html>

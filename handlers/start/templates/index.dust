@@ -1,7 +1,26 @@
-{#pgi}
-	<div>{name}</div>
-	<div>{disese_name}</div>
-	<div>{symptoms}</div>
-	<div>{medicine_info}</div>
-	<div>{other_info}</div>
-{/pgi}
+<div class="img"></div>
+<div class="specialnote"></div>
+<div class="latest"></div>
+<div class="categories">
+	<div class="cat1">
+		<div class="cat11">
+			{#t}
+				<div>{name}</div>
+			{/t}
+		</div>
+	</div>
+	<div class="cat2">
+		<div class="cat12">
+			{#pt}
+				<div>{name}</div>
+			{/pt}
+		</div>
+	</div>
+	<div class="cat3">
+		<div class="cat13">
+			{#pst}
+				<div>{name}</div>
+			{/pst}
+		</div>
+	</div>
+</div>

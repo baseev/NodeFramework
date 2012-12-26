@@ -1,42 +1,6 @@
 var utils = require('./../../utils/utils');
 var className_ = "startModel";
 
-function getPiwikUsers(callback)
-{
-	var pool = utils.getMasterDbConnection();
-	pool.acquire(function(err, db) {
-        if (err) {
-            utils.LOG.error("startModel / getPiwikUsers / " + err);
-        }
-        db.query().select('*').from('piwik_user').execute(function(err, rows, columns) {
-            pool.release(db);
-            if (err) {
-               utils.LOG.error("startModel / getPiwikUsers / Query error : " +  err);
-            }
-            callback(rows);
-        });
-    });
-}
-
-
-
-function getPiwikSites(callback)
-{
-	var pool = utils.getMasterDbConnection();
-	pool.acquire(function(err, db) {
-        if (err) {
-            console.log("CONNECTION error: " + err);
-        }
-        db.query().select('*').from('piwik_site').execute(function(err, rows, columns) {
-            pool.release(db);
-            if (err) {
-               utils.LOG.error("startModel / getPiwikUsers / Query error : " + err);
-            }
-            callback(rows);
-        });
-    });
-}
-
 
 function getPetsGeneralInfo(callback)
 {
@@ -56,10 +20,67 @@ function getPetsGeneralInfo(callback)
 }
 
 
+
+function getType(callback)
+{
+	var pool = utils.getMasterDbConnection();
+	pool.acquire(function(err, db) {
+        if (err) {
+           	utils.LOG.error("startModel / getPetsGeneralInfo / " + err);
+        }
+        db.query("SELECT t.id, t.name FROM type t WHERE is_deleted = 0").execute(function(err, rows, columns) {
+            pool.release(db);
+            if (err) {
+               	utils.LOG.error("startModel / getPetsGeneralInfo / Query error : " + err);
+            }
+            callback(rows);
+        });
+    });
+}
+
+
+function getPetsType(callback)
+{
+	var pool = utils.getMasterDbConnection();
+	pool.acquire(function(err, db) {
+        if (err) {
+           	utils.LOG.error("startModel / getPetsGeneralInfo / " + err);
+        }
+        db.query("SELECT pt.id, pt.name FROM pets_type pt WHERE is_deleted = 0").execute(function(err, rows, columns) {
+            pool.release(db);
+            if (err) {
+               	utils.LOG.error("startModel / getPetsGeneralInfo / Query error : " + err);
+            }
+            callback(rows);
+        });
+    });
+}
+
+
+
+function getPetsSubType(callback)
+{
+	var pool = utils.getMasterDbConnection();
+	pool.acquire(function(err, db) {
+        if (err) {
+           	utils.LOG.error("startModel / getPetsGeneralInfo / " + err);
+        }
+        db.query("SELECT pst.id, pst.name FROM pets_sub_type pst WHERE is_deleted = 0").execute(function(err, rows, columns) {
+            pool.release(db);
+            if (err) {
+               	utils.LOG.error("startModel / getPetsGeneralInfo / Query error : " + err);
+            }
+            callback(rows);
+        });
+    });
+}
+
+
 //create a global obect
 startModel 								=  function() {}
-startModel.prototype.getPiwikUsers 		= getPiwikUsers;
-startModel.prototype.getPiwikSites 		= getPiwikSites;
 startModel.prototype.getPetsGeneralInfo = getPetsGeneralInfo;
+startModel.prototype.getType 			= getType;
+startModel.prototype.getPetsType 		= getPetsType;
+startModel.prototype.getPetsSubType 	= getPetsSubType;
 
 exports.Model = startModel;

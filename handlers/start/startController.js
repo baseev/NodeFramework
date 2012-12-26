@@ -23,42 +23,47 @@ function index(request, response) {
 					    				);
 					    		},
 					    		
-					    "index_template": function(callback){
+					    "startTemplate": function(callback){
 					    				utils.getContents(path, "index", "dust", function(err, template){
 					    						callback(err, template);
 					    					}
 					    				);
 					    		},
 					    		
-					    "pgi": 	function(callback){				
-							    			_model.getPetsGeneralInfo(function(rows) {
+					    "t": 	function(callback){				
+							    			_model.getType(function(rows) {
 												callback(null, rows);
 											}
 										);
 					    		},
 					    		
-					    "PiwikSites": 	function(callback){
-											_model.getPiwikSites(function(rows) {
+					    "pt": 	function(callback){				
+							    			_model.getPetsType(function(rows) {
 												callback(null, rows);
 											}
 										);
 					    		},
-					    
+					    		
+					    "pst": 	function(callback){				
+							    			_model.getPetsSubType(function(rows) {
+												callback(null, rows);
+											}
+										);
+					    		}
 					},
 					
 					function(err, results) {
-						utils.LOG.error(name+" / index / error / "+JSON.stringify(err));
-						utils.LOG.info(name+" / index / Success / "+JSON.stringify(results));
+						//utils.LOG.error(name+" / index / error / "+JSON.stringify(err));
+						//utils.LOG.info(name+" / index / Success / "+JSON.stringify(results));
 						
 						
-						dust.loadSource(dust.compile(results.index_template, "partial"));
-						dust.loadSource(dust.compile(results.main, "index"));
+						dust.loadSource(dust.compile(results.startTemplate, "partial"));
+						dust.loadSource(dust.compile(results.main, "main"));
 						//render dust template
 						//utils.debug(JSON.stringify(dust.cache));
-						dust.render("index", results, function(err, output) {
-								utils.LOG.error(name+" / index / dust error / "+JSON.stringify(err));
-								utils.LOG.info(name+" / index / dust output / "+JSON.stringify(output));
-								
+						dust.render("main", results, function(err, output) {
+								//utils.LOG.error(name+" / index / dust error / "+JSON.stringify(err));
+								//utils.LOG.info(name+" / index / dust output / "+JSON.stringify(output));
 				
 								response.writeHead(200, constants.HTML_RESPONSE_HEADERS);
 								response.write(output);
